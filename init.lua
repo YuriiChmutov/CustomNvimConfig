@@ -27,7 +27,6 @@ require("vim-options")
 require("lazy").setup("plugins")
 require("keymaps")
 
-
 require("neo-tree").setup({
   filesystem = {
     follow_current_file = {
@@ -35,6 +34,3 @@ require("neo-tree").setup({
     },
   },
 })
-
-
-
