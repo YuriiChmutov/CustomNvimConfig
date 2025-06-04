@@ -21,7 +21,6 @@ return {
             lspconfig.lua_ls.setup({})
 
             lspconfig.gopls.setup({
-                capabilities = capabilities,
                 settings = {
                     gopls = {
                         analyses = {
