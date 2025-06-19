@@ -18,8 +18,10 @@ return {
         config = function()
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            -- Lua
             lspconfig.lua_ls.setup({})
 
+            -- Go
             lspconfig.gopls.setup({
                 settings = {
                     gopls = {
@@ -32,9 +34,25 @@ return {
                 },
             })
 
+            -- Rust + Clippy
+            lspconfig.rust_analyzer.setup({
+               -- capabilities = capabilities,
+                settings = {
+                    ["rust-analyzer"] = {
+                        checkOnSave = {
+                            command = "clippy",
+                        },
+                    },
+                },
+            })
+
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
+
+            vim.cmd [[
+                autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })
+            ]]
         end
     }
 }

@@ -35,3 +35,7 @@ require("neo-tree").setup({
     },
   },
 })
+
+-- vim.cmd [[
+--   autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focus = false })
+-- ]]

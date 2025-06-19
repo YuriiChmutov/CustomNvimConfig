@@ -12,6 +12,31 @@ return {
         require("dapui").setup()
         require("dap-go").setup()
 
+        dap.adapters.codelldb = {
+          type = 'server',
+          port = "${port}",
+          executable = {
+             command = '/home/yuriich/.local/share/nvim/mason/bin/codelldb',
+             args = {"--port", "${port}"},
+          }
+        }
+
+        dap.configurations.rust = {
+          {
+            name = "Launch file",
+            type = "codelldb",
+            request = "launch",
+            program = function()
+              -- собери бинарник перед дебагом
+              vim.fn.jobstart("cargo build")
+              return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+            stopOnEntry = false,
+          },
+        }
+
+
         dap.listeners.before.attach.dapui_config = function()
         dapui.open()
         end
