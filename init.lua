@@ -26,6 +26,7 @@ vim.o.number = true
 
 require("vim-options")
 require("lazy").setup("plugins")
+require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/lua/snippets" })
 require("keymaps")
 
 require("neo-tree").setup({
